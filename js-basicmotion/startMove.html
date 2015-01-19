@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>匀速运动</title>
+    <style>
+        #div1{width: 200px; height: 200px; position: absolute; left: 0px; top: 50px; background-color: #ff0000;}
+    </style>
+    <script>
+        var timer = null;
+
+        function startMove() {
+            var oDiv = document.getElementById("div1");
+
+            clearInterval(timer);
+            timer = setInterval(function() {
+                var speed = 1;
+
+                if(oDiv.offsetLeft >= 300) {
+                    clearInterval(timer);
+                }
+                else {
+                    oDiv.style.left = oDiv.offsetLeft+speed+'px';
+                };
+            }, 30);
+        }
+        /*运动框架：
+          要点：
+          1.在开始运动时，关闭已有定时器
+          2.把运动和停止间隔开（if/else）
+        */
+    </script>
+</head>
+<body>
+<input type="button" value="开始运动" onclick="startMove()"/>
+<div id="div1"></div>
+</body>
+</html>
