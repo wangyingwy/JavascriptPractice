@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>改变多物体的宽度</title>
+    <style>
+        div{width: 100px; height: 50px; background-color: #ff0000; margin: 10px;}
+    </style>
+    <script>
+        window.onload = function() {
+            var aDiv = document.getElementsByTagName("div");
+
+            for(var i=0;i<aDiv.length;i++) {
+                aDiv.timer = null;
+
+                aDiv[i].onmouseover = function() {
+                    startMove(this, 400);
+                };
+
+                aDiv[i].onmouseout = function() {
+                    startMove(this, 100);
+                };
+            }
+        };
+
+        function startMove(obj, iTarget) {
+            clearInterval(obj.timer);
+
+            obj.timer = setInterval(function() {
+                var speed = (iTarget - obj.offsetWidth)/6;
+                speed = speed>0?Math.ceil(speed):Math.floor(speed);
+                console.log(speed);
+                if(obj.offsetWidth == iTarget) {
+                    clearInterval(obj.timer);
+                }
+                else {
+                    obj.style.width = obj.offsetWidth + speed + 'px';
+                };
+            }, 30);
+        }
+    </script>
+</head>
+<body>
+<div></div>
+<div></div>
+<div></div>
+</body>
+</html>
